@@ -57,7 +57,7 @@ class Pacman{
 
     }
     draw(){
-
+ 
     }
     getMapX(){
         return parseInt(this.x/ oneBlockSize);
