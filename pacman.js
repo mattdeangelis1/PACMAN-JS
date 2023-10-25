@@ -8,6 +8,7 @@ class Pacman{
         this.direction = DIRECTION_RIGHT;
         this.currentFrame = 1;
         this.frameCount = 7;
+        this.nextDirection = this.direction;
         setInterval(() => {
             this.changeAnimation()
         }, 100);
@@ -17,6 +18,7 @@ class Pacman{
         this.moveForwards();
         if(this.checkCollision()){
             this.moveBackwards();
+            return;
         }
     }
     eat(){
@@ -69,7 +71,17 @@ class Pacman{
 
     }
     changeDirectionIfPossible(){
-
+        if(this.direction == this.nextDirection) return
+        let tempDirection = this.direction
+        this.direction = this.nextDirection
+        this.moveForwards();
+        if(this.checkCollision()){
+            this.moveBackwards();
+            this.direction = tempDirection
+        }
+        else{
+            this.moveBackwards();
+        }
     }
     changeAnimation(){
             this.currentFrame = this.currentFrame == this.frameCount ? 1 : this.currentFrame + 1;
@@ -105,10 +117,10 @@ class Pacman{
         return parseInt(this.y/ oneBlockSize);
     }
     getMapXRightSide(){
-        return parseInt((this.x/ + 0.9999 * oneBlockSize) / oneBlockSize);
+        return parseInt((this.x + 0.9999 * oneBlockSize) / oneBlockSize);
     }
     getMapYRightSide(){
-        return parseInt((this.y/ + 0.9999 * oneBlockSize) / oneBlockSize);
+        return parseInt((this.y + 0.9999 * oneBlockSize) / oneBlockSize);
     }
 
 }

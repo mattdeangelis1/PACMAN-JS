@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 const pacmanFrames = document.getElementById("animations");
-const ghostFrames = document.getElementById("ghost");
+const ghostFrames = document.getElementById("ghosts");
 
 let createRect = (x, y, width, height, color)=>{
     canvasContext.fillStyle= color 
@@ -13,6 +13,7 @@ let wallColor = "#342DCA";
 let wallSpaceWidth = oneBlockSize / 1.5;
 let wallOffset = (oneBlockSize - wallSpaceWidth) / 2;
 let wallInnerColor = "black";
+let foodColor = "#FEB897"
 const DIRECTION_RIGHT = 4;
 const DIRECTION_UP = 3;
 const DIRECTION_LEFT = 2;
@@ -49,9 +50,25 @@ let gameLoop = () => {
 let update = () =>{
     pacman.moveProcess();
 }
+let drawFoods = () => {
+    for(let i = 0; i < map.length; i++){
+        for(let j = 0; j <map[0].length; j++){
+            if(map[i][j] == 2){
+                createRect(
+                    j * oneBlockSize + oneBlockSize / 3,
+                    i * oneBlockSize + oneBlockSize / 3,
+                    oneBlockSize / 3,
+                    oneBlockSize / 3,
+                    foodColor
+                )
+            }
+        }
+    }
+}
 let draw = () =>{
     createRect(0,0, canvas.width, canvas.height, "black");
     drawWalls();
+    drawFoods();
     pacman.draw();
 }
 let gameInterval = setInterval(gameLoop, 1000 / fps);
@@ -105,3 +122,20 @@ let createNewPacman = () => {
 };
 createNewPacman();
 gameLoop();
+window.addEventListener("keydown" , (event)=>{
+    let k = event.keyCode
+    setTimeout(()=>{
+        if(k == 37 || k == 65){
+            pacman.nextDirection = DIRECTION_LEFT;
+        }
+        else if (k == 38 || k == 87){
+            pacman.nextDirection = DIRECTION_UP;
+        }
+        else if (k == 39 || k == 68){
+            pacman.nextDirection = DIRECTION_RIGHT;
+        }
+        else if (k == 40 || k == 83){
+            pacman.nextDirection = DIRECTION_BOTTOM;
+        }
+    }, 1)
+})
