@@ -82,7 +82,7 @@ let draw = () =>{
     drawFoods();
     pacman.draw();
     drawScore();
-}
+} 
 
 let gameInterval = setInterval(gameLoop, 1000 / fps);
 let drawWalls = () => {
