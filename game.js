@@ -75,7 +75,7 @@ let drawScore = () => {
         0,
         oneBlockSize * (map.length + 1)
     );
-}; 
+};  
 let draw = () =>{
     createRect(0,0, canvas.width, canvas.height, "black");
     drawWalls();
