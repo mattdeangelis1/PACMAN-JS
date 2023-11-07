@@ -248,7 +248,7 @@ class Ghost {
     changeAnimation() {
         this.currentFrame =
             this.currentFrame == this.frameCount ? 1 : this.currentFrame + 1;
-    }
+    } 
 
     draw() {
         canvasContext.save();
