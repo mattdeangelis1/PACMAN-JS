@@ -250,7 +250,7 @@ class Ghost {
             this.currentFrame == this.frameCount ? 1 : this.currentFrame + 1;
     } 
 
-    draw() {
+    draw() { 
         canvasContext.save();
         canvasContext.drawImage(
             ghostFrames,
