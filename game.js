@@ -243,7 +243,7 @@ let createGhosts = () => {
         );
         ghosts.push(newGhost);
     }
-};
+}; 
 
 createNewPacman();
 createGhosts();
